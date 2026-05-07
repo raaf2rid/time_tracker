@@ -1,0 +1,114 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Activity Log</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="top-nav">
+      <div class="brand">ProFlow</div>
+      <nav>
+        <button class="nav-link active" type="button">Analytics</button>
+        <button class="nav-link" type="button">Workflow</button>
+        <button class="nav-link" type="button">Resources</button>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" type="button">&#9881;</button>
+      </div>
+    </header>
+
+    <main class="app">
+      <section id="homeScreen" class="screen active">
+        <section class="card main-card">
+          <div class="home-grid">
+            <div class="donut-wrap">
+              <div id="donut" class="donut" aria-label="Up/Active/Idle chart">
+                <div class="donut-center">
+                  <p>Total Time</p>
+                  <h2 id="homeUp">00:00:00</h2>
+                  <span id="homeDate" class="tiny">Today</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="metric-panel">
+              <h1>Session Performance</h1>
+              <p class="sub">
+                Professional breakdown of active focus time versus idle intervals.
+              </p>
+
+              <div class="legend-row">
+                <div class="legend-item">
+                  <span class="dot active"></span>
+                  <div>
+                    <p>Active Time</p>
+                    <strong id="homeActive">00:00:00</strong>
+                    <em id="homeActivePct">0%</em>
+                  </div>
+                </div>
+                <div class="legend-item">
+                  <span class="dot idle"></span>
+                  <div>
+                    <p>Idle Time</p>
+                    <strong id="homeIdle">00:00:00</strong>
+                    <em id="homeIdlePct">0%</em>
+                  </div>
+                </div>
+              </div>
+
+              <div class="foot-row">
+                <span>Updated automatically</span>
+                <button id="openDetailsBtn" class="primary" type="button">View Details</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section id="detailsScreen" class="screen">
+        <header class="screen-header details-header">
+          <button id="backBtn" class="icon-btn" type="button">&#8592;</button>
+          <div>
+            <h1>Activity Details</h1>
+            <p id="detailsDate" class="sub"></p>
+          </div>
+        </header>
+
+        <section class="card">
+          <div class="toolbar">
+            <div class="segmented">
+              <button class="mode-btn active" data-mode="day" type="button">Day</button>
+              <button class="mode-btn" data-mode="week" type="button">Week</button>
+            </div>
+            <div class="nav-buttons">
+              <button id="prevBtn" class="icon-btn" type="button">&#8592;</button>
+              <button id="nextBtn" class="icon-btn" type="button">&#8594;</button>
+            </div>
+          </div>
+
+          <div class="summary-line">
+            <p>Up Time: <strong id="detailsUp">00:00:00</strong></p>
+            <p>Active: <strong id="detailsActive">00:00:00</strong></p>
+            <p>Idle: <strong id="detailsIdle">00:00:00</strong></p>
+          </div>
+
+          <div id="barChart" class="bar-chart"></div>
+        </section>
+
+        <section class="card">
+          <h3>Applications</h3>
+          <p class="sub small">This will list per-app activity once app-level capture is enabled.</p>
+          <ul id="appList" class="app-list"></ul>
+        </section>
+      </section>
+    </main>
+
+    <script src="./renderer.js"></script>
+  </body>
+</html>
+

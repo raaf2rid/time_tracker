@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 220 10% 7%;
+  --foreground: 210 14% 95%;
+  --card: 220 6% 13%;
+  --card-foreground: 210 10% 90%;
+  --primary: 220 6% 76%;
+  --primary-foreground: 220 12% 8%;
+  --muted: 220 6% 18%;
+  --muted-foreground: 220 6% 71%;
+  --border: 220 5% 24%;
+  --input: 220 5% 24%;
+  --ring: 220 6% 76%;
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+  font-family: Manrope, Segoe UI, sans-serif;
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.008), transparent 28%),
+    radial-gradient(circle at 82% 78%, rgba(255, 255, 255, 0.006), transparent 24%),
+    linear-gradient(180deg, #151a22, #10151c 55%, #0c1118 100%);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.mono {
+  font-family: "JetBrains Mono", Consolas, monospace;
+}
+
+/* Suppress SVG focus outlines from Recharts interactive elements. */
+.recharts-wrapper svg *:focus,
+.recharts-wrapper svg *:focus-visible {
+  outline: none !important;
+}

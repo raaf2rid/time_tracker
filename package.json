@@ -1,0 +1,80 @@
+{
+  "name": "time_tracker",
+  "version": "1.0.0",
+  "description": "Windows-first uptime and active-time tracker",
+  "main": "main.js",
+  "scripts": {
+    "build:ui": "vite build --config ui/vite.config.js",
+    "start": "powershell -NoProfile -Command \"Remove-Item Env:ELECTRON_RUN_AS_NODE -ErrorAction SilentlyContinue; npm run build:ui; electron .\"",
+    "dev:ui": "vite --config ui/vite.config.js --host 127.0.0.1 --port 5173",
+    "dev:electron": "wait-on tcp:5173 && powershell -NoProfile -Command \"Remove-Item Env:ELECTRON_RUN_AS_NODE -ErrorAction SilentlyContinue; $env:VITE_DEV_SERVER_URL='http://127.0.0.1:5173'; electron .\"",
+    "dev": "concurrently -k \"npm:dev:ui\" \"npm:dev:electron\"",
+    "icons:generate": "node scripts/generate-icons.mjs",
+    "icons:preview": "node scripts/generate-icon-preview.mjs",
+    "test": "echo \"No tests configured\"",
+    "pack:win": "npm run build:ui && electron-builder --win --dir",
+    "pack:win:icon": "npm run build:ui && electron-builder --win --dir",
+    "dist:win": "npm run build:ui && electron-builder --win"
+  },
+  "keywords": [
+    "time-tracker",
+    "electron",
+    "productivity"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.2.4",
+    "@radix-ui/react-tabs": "^1.1.13",
+    "chart.js": "^4.5.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.38.0",
+    "lucide-react": "^1.8.0",
+    "react": "^19.2.5",
+    "react-chartjs-2": "^5.3.1",
+    "react-circular-progressbar": "^2.2.0",
+    "react-dom": "^19.2.5",
+    "react-donut-chart": "^1.3.3",
+    "recharts": "^3.8.1",
+    "tailwind-merge": "^3.5.0"
+  },
+  "devDependencies": {
+    "@phosphor-icons/core": "^2.1.1",
+    "@vitejs/plugin-react": "^4.7.0",
+    "autoprefixer": "^10.5.0",
+    "concurrently": "^9.2.1",
+    "electron": "^41.3.0",
+    "electron-builder": "^24.13.3",
+    "fluentui-emoji": "^1.3.0",
+    "icon-gen": "^4.0.0",
+    "postcss": "^8.5.10",
+    "rcedit": "^4.0.1",
+    "tailwindcss": "^3.4.17",
+    "vite": "^6.4.2",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "local.activity.log",
+    "productName": "Activity Log",
+    "directories": {
+      "buildResources": "ui/electron-icons"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*",
+      "assets/**/*",
+      "renderer/**/*",
+      "ui/dist/**/*",
+      "ui/electron-icons/**/*",
+      "package.json"
+    ],
+    "win": {
+      "icon": "windows/icon.ico",
+      "target": [
+        "nsis"
+      ]
+    }
+  }
+}

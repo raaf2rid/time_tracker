@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+/dist/
+/dist-*/
+/ui/dist/
+
+# Electron builder artifacts
+*.blockmap
+
+# Local DB/runtime
+tracker.db
+
+ui/electron-icons/icons-preview.html
