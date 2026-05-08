@@ -675,7 +675,7 @@ export default function App() {
                     </div>
                   <div className="grid gap-3 md:grid-cols-3">
                     <div className="rounded-2xl bg-[#141a22] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,.03),inset_0_-14px_24px_rgba(0,0,0,.28),0_14px_24px_rgba(0,0,0,.34),0_0_0_1px_rgba(255,255,255,.03)]">
-                      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Total Time</p>
+                      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Weekly Total</p>
                       <p className="mono mt-3 text-[1.5rem] leading-none font-semibold text-white">{formatDuration(weeklyTotals.totalUpSeconds)}</p>
                       <p className="mt-2 text-xs text-muted-foreground">
                         {weeklyTotals.dayCount
@@ -684,7 +684,7 @@ export default function App() {
                       </p>
                     </div>
                     <div className="rounded-2xl bg-[#141a22] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,.03),inset_0_-14px_24px_rgba(0,0,0,.28),0_14px_24px_rgba(0,0,0,.34),0_0_0_1px_rgba(255,255,255,.03)]">
-                      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Avg Total Time</p>
+                      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Daily Average</p>
                       <p className="mono mt-3 text-[1.5rem] leading-none font-semibold text-white">{formatDuration(weeklyAverages.avgTotalSeconds)}</p>
                       <p className="mt-2 text-xs text-muted-foreground">
                         {weeklyAverages.dayCount
