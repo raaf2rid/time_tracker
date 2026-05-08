@@ -12,9 +12,9 @@
     "icons:generate": "node scripts/generate-icons.mjs",
     "icons:preview": "node scripts/generate-icon-preview.mjs",
     "test": "echo \"No tests configured\"",
-    "pack:win": "npm run build:ui && electron-builder --win --dir",
+    "pack:win": "npm run build:ui && electron-builder --win --dir --config.win.signAndEditExecutable=false && node scripts/patch-win-unpacked-icon.cjs",
     "pack:win:icon": "npm run build:ui && electron-builder --win --dir",
-    "dist:win": "npm run build:ui && electron-builder --win"
+    "dist:win": "npm run build:ui && electron-builder --win --config.win.signAndEditExecutable=false && node scripts/patch-win-unpacked-icon.cjs"
   },
   "keywords": [
     "time-tracker",
