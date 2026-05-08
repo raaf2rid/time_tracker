@@ -267,6 +267,16 @@ export default function App() {
       avgDirectSeconds: Math.round(totalDirect / activeDays.length)
     }
   }, [details])
+  const weeklyTotals = useMemo(() => {
+    const rows = details?.bars || []
+    const totalUpSeconds = rows.reduce((sum, row) => sum + (row.upSeconds || 0), 0)
+    const totalDirectSeconds = rows.reduce((sum, row) => sum + (row.activeSeconds || 0), 0)
+    return {
+      totalUpSeconds,
+      totalDirectSeconds,
+      dayCount: rows.length
+    }
+  }, [details])
 
   const cardShellClass = "relative mx-auto w-full max-w-[735px] overflow-hidden rounded-[30px] border-0 bg-gradient-to-br from-[#141a23] via-[#121821] to-[#171d27] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,.03),inset_0_-24px_38px_rgba(0,0,0,.3),0_42px_96px_rgba(0,0,0,.62),0_0_0_1px_rgba(255,255,255,.025)]"
   const spring = { type: "spring", stiffness: 380, damping: 36, mass: 0.62 }
@@ -659,9 +669,22 @@ export default function App() {
                       <ChevronRight className="h-4 w-4" />
                     </Button>
                   </div>
-                  <div className="mt-3 grid gap-3 md:grid-cols-2">
+                  <div className="mt-3">
+                    <div className="mb-2 px-1">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/65">Weekly Summary</p>
+                    </div>
+                  <div className="grid gap-3 md:grid-cols-3">
                     <div className="rounded-2xl bg-[#141a22] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,.03),inset_0_-14px_24px_rgba(0,0,0,.28),0_14px_24px_rgba(0,0,0,.34),0_0_0_1px_rgba(255,255,255,.03)]">
-                      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Weekly Avg Total Time</p>
+                      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Total Time</p>
+                      <p className="mono mt-3 text-[1.5rem] leading-none font-semibold text-white">{formatDuration(weeklyTotals.totalUpSeconds)}</p>
+                      <p className="mt-2 text-xs text-muted-foreground">
+                        {weeklyTotals.dayCount
+                          ? `Across ${weeklyTotals.dayCount} day${weeklyTotals.dayCount > 1 ? "s" : ""}`
+                          : "No data in selected week"}
+                      </p>
+                    </div>
+                    <div className="rounded-2xl bg-[#141a22] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,.03),inset_0_-14px_24px_rgba(0,0,0,.28),0_14px_24px_rgba(0,0,0,.34),0_0_0_1px_rgba(255,255,255,.03)]">
+                      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Avg Total Time</p>
                       <p className="mono mt-3 text-[1.5rem] leading-none font-semibold text-white">{formatDuration(weeklyAverages.avgTotalSeconds)}</p>
                       <p className="mt-2 text-xs text-muted-foreground">
                         {weeklyAverages.dayCount
@@ -670,7 +693,7 @@ export default function App() {
                       </p>
                     </div>
                     <div className="rounded-2xl bg-[#141a22] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,.03),inset_0_-14px_24px_rgba(0,0,0,.28),0_14px_24px_rgba(0,0,0,.34),0_0_0_1px_rgba(255,255,255,.03)]">
-                      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Weekly Avg Direct Activity</p>
+                      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Avg Direct Activity</p>
                       <p className="mono mt-3 text-[1.5rem] leading-none font-semibold text-white">{formatDuration(weeklyAverages.avgDirectSeconds)}</p>
                       <p className="mt-2 text-xs text-muted-foreground">
                         {weeklyAverages.dayCount
@@ -678,6 +701,7 @@ export default function App() {
                           : "No active days in selected week"}
                       </p>
                     </div>
+                  </div>
                   </div>
                 </div>
 
